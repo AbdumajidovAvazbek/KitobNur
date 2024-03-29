@@ -1,4 +1,5 @@
 ﻿using KitobNur.Domain.Comon;
+using KitobNur.Domain.Enum;
 
 namespace KitobNur.Domain.Users
 {
@@ -14,5 +15,8 @@ namespace KitobNur.Domain.Users
         public string? StudyPlaces { get; set; }
         public string ImageUrl { get; set; }
         public string Address { get; set; }
+        public GenderType GenderType { get; set; }
+        public UserStatus userStatus { get; set; }
+        public UserType userType { get; set; }
     }
 }

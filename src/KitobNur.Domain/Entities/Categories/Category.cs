@@ -2,7 +2,7 @@
 
 namespace KitobNur.Domain.Entities.Categories;
 
-public class Categories:Auditable<int>
+public class Category:Auditable<int>
 {
     public string Name { get; set; }
 }

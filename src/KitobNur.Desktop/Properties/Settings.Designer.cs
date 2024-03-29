@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KitobNur.Properties
+namespace KitobNur.Desktop.Properties
 {
 
 

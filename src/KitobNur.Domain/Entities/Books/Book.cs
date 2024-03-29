@@ -1,4 +1,5 @@
 ﻿using KitobNur.Domain.Comon;
+using KitobNur.Domain.Entities.Categories;
 
 namespace KitobNur.Domain.Entities.Books;
 
@@ -10,5 +11,7 @@ public class Book : Auditable<long>
     public short counte { get; set; }  
     public decimal Balance { get; set; }
     public string ImagePath { get; set; }
+    public int CategoryId { get; set; }
+    public Category category { get; set; }
 
 }
