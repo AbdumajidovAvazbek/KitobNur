@@ -1,6 +1,8 @@
-﻿namespace KitobNur.Domain.Entities.Books;
+﻿using KitobNur.Domain.Comon;
 
-public class BestsellerBook
+namespace KitobNur.Domain.Entities.Books;
+
+public class BestsellerBook : Auditable<int>
 {
     public string Name { get; set; }
 }

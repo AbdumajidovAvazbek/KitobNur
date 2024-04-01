@@ -20,7 +20,7 @@ namespace SizeAdvisor.Data.DbContexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Server = localhost; port = 5432; database = SizeAdvisor; User Id = postgres; password = 123456@avbek");
+            optionsBuilder.UseNpgsql("Server = localhost; port = 5432; database = KitobNurDb; User Id = postgres; password = 123456@avbek");
         }
     }
 }
