@@ -1,9 +1,8 @@
-﻿using KitobNur.Domain.Comon;
-using KitobNur.Domain.Enum;
+﻿using KitobNur.Domain.Enum;
 
-namespace KitobNur.Domain.Users
+namespace KitobNur.Service.Dtos.Users
 {
-    public class User : Auditable<long>
+    public class UserForCreationDto
     {
         public string Name { get; set; }
         public string MiddleName { get; set; }

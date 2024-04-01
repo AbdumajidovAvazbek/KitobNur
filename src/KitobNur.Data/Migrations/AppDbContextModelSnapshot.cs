@@ -70,11 +70,17 @@ namespace KitobNur.Data.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("text");
 
+                    b.Property<long?>("RentalId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("VistorLogId")
+                        .HasColumnType("bigint");
 
                     b.Property<short>("counte")
                         .HasColumnType("smallint");
@@ -82,6 +88,10 @@ namespace KitobNur.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("RentalId");
+
+                    b.HasIndex("VistorLogId");
 
                     b.ToTable("Books");
                 });
@@ -165,9 +175,6 @@ namespace KitobNur.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("BookId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -178,8 +185,6 @@ namespace KitobNur.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookId");
 
                     b.HasIndex("UserId");
 
@@ -194,9 +199,6 @@ namespace KitobNur.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("BookID")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -210,8 +212,6 @@ namespace KitobNur.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookID");
 
                     b.HasIndex("UserId");
 
@@ -244,6 +244,9 @@ namespace KitobNur.Data.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("text");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
                     b.Property<string>("PassportNumber")
                         .HasColumnType("text");
 
@@ -258,9 +261,6 @@ namespace KitobNur.Data.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("text");
 
                     b.Property<string>("WorkPlace")
                         .HasColumnType("text");
@@ -284,6 +284,14 @@ namespace KitobNur.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("KitobNur.Domain.Library.Rental", null)
+                        .WithMany("Books")
+                        .HasForeignKey("RentalId");
+
+                    b.HasOne("KitobNur.Domain.Entities.Users.VistorLog", null)
+                        .WithMany("Books")
+                        .HasForeignKey("VistorLogId");
+
                     b.Navigation("category");
                 });
 
@@ -300,40 +308,34 @@ namespace KitobNur.Data.Migrations
 
             modelBuilder.Entity("KitobNur.Domain.Entities.Users.VistorLog", b =>
                 {
-                    b.HasOne("KitobNur.Domain.Entities.Books.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("KitobNur.Domain.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Book");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("KitobNur.Domain.Library.Rental", b =>
                 {
-                    b.HasOne("KitobNur.Domain.Entities.Books.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("KitobNur.Domain.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Book");
-
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("KitobNur.Domain.Entities.Users.VistorLog", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("KitobNur.Domain.Library.Rental", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

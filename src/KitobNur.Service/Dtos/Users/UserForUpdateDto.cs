@@ -1,11 +1,10 @@
-﻿using KitobNur.Domain.Comon;
-using KitobNur.Domain.Enum;
+﻿using KitobNur.Domain.Enum;
 
-namespace KitobNur.Domain.Users
+namespace KitobNur.Service.Dtos.Users
 {
-    public class User : Auditable<long>
+    public class UserForUpdateDto
     {
-        public string Name { get; set; }
+        public string UserName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string? TelegramId { get; set; }

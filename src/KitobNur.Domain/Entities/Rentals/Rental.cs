@@ -11,8 +11,7 @@ namespace KitobNur.Domain.Library
         public long UserId { get; set; } // Foreign Key to Readers table
         public User User { get; set; } // Navigation property
 
-        public long BookID { get; set; } // Foreign Key to Books table
-        public Book Book { get; set; } // Navigation property
+        public ICollection<Book> Books { get; set; }
 
     }
 }
