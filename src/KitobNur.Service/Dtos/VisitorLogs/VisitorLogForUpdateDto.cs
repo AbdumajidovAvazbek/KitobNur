@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KitobNur.Domain.Entities.Books;
 
-namespace KitobNur.Service.Dtos.VisitorLogs
+namespace KitobNur.Service.Dtos.VisitorLogs;
+
+public class VisitorLogForUpdateDto
 {
-    internal class VisitorLogForUpdateDto
-    {
-    }
+    public long UserId { get; set; }
+    public ICollection<Book> Books { get; set; }
 }

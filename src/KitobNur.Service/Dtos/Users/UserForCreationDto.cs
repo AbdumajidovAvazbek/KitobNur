@@ -15,7 +15,5 @@ namespace KitobNur.Service.Dtos.Users
         public string ImageUrl { get; set; }
         public string Address { get; set; }
         public GenderType GenderType { get; set; }
-        public UserStatus userStatus { get; set; }
-        public UserType userType { get; set; }
     }
 }
