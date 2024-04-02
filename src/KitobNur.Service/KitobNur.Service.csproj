@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Commons\" />
     <Folder Include="Services\Books\" />
-    <Folder Include="Services\Categories\" />
     <Folder Include="Services\Users\" />
     <Folder Include="Services\Rentals\" />
   </ItemGroup>
@@ -16,9 +16,11 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KitobNur.Data\KitobNur.Data.csproj" />
     <ProjectReference Include="..\KitobNur.Domain\KitobNur.Domain.csproj" />
   </ItemGroup>
 
