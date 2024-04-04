@@ -1,6 +1,5 @@
 ﻿using KitobNur.Service.Helpers;
 using Microsoft.AspNetCore.Http;
-
 namespace LocationTracker.Service.Helpers;
 
 public static class FileUploadHelper
