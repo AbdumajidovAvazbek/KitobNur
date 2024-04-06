@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SizeAdvisor.Data.DbContexts;
@@ -11,9 +12,11 @@ using SizeAdvisor.Data.DbContexts;
 namespace KitobNur.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240405025551_AutableChangeMigrationTest")]
+    partial class AutableChangeMigrationTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,44 +97,6 @@ namespace KitobNur.Data.Migrations
                     b.HasIndex("VistorLogId");
 
                     b.ToTable("Books");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Author = "Harper Lee",
-                            Balance = 100m,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 4, 5, 3, 17, 22, 149, DateTimeKind.Utc).AddTicks(6040),
-                            Description = "A novel by Harper Lee",
-                            ImagePath = "C:\\Users\\User\\source\\repos\\KitobNur\\KitobNur\\src\\KitobNur.Data\\photo_5217546724271315430_x.jpg",
-                            Name = "To Kill a Mockingbird",
-                            counte = (short)10
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Author = "George Orwell",
-                            Balance = 90m,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 4, 5, 3, 17, 22, 149, DateTimeKind.Utc).AddTicks(6052),
-                            Description = "A novel by George Orwell",
-                            ImagePath = "C:\\Users\\User\\source\\repos\\KitobNur\\KitobNur\\src\\KitobNur.Data\\photo_5217546724271315430_x.jpg",
-                            Name = "1984",
-                            counte = (short)8
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Author = "Yuval Noah Harari",
-                            Balance = 120m,
-                            CategoryId = 2,
-                            CreatedAt = new DateTime(2024, 4, 5, 3, 17, 22, 149, DateTimeKind.Utc).AddTicks(6057),
-                            Description = "A book by Yuval Noah Harari",
-                            ImagePath = "C:\\Users\\User\\source\\repos\\KitobNur\\KitobNur\\src\\KitobNur.Data\\photo_5217546724271315430_x.jpg",
-                            Name = "Sapiens: A Brief History of Humankind",
-                            counte = (short)15
-                        });
                 });
 
             modelBuilder.Entity("KitobNur.Domain.Entities.Books.InitBook", b =>
@@ -203,20 +168,6 @@ namespace KitobNur.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 4, 5, 3, 17, 22, 149, DateTimeKind.Utc).AddTicks(5754),
-                            Name = "Fiction"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2024, 4, 5, 3, 17, 22, 149, DateTimeKind.Utc).AddTicks(5767),
-                            Name = "Non-fiction"
-                        });
                 });
 
             modelBuilder.Entity("KitobNur.Domain.Entities.Users.VistorLog", b =>

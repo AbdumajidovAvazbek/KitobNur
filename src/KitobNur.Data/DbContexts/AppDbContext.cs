@@ -4,10 +4,11 @@ using KitobNur.Domain.Entities.Users;
 using KitobNur.Domain.Library;
 using KitobNur.Domain.Users;
 using Microsoft.EntityFrameworkCore;
+using KitobNur.Data.SeedDatas; // Import the namespace containing SeedData
 
 namespace SizeAdvisor.Data.DbContexts
 {
-    public class AppDbContext : DbContext 
+    public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
@@ -21,6 +22,19 @@ namespace SizeAdvisor.Data.DbContexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Server = localhost; port = 5432; database = KitobNurDb; User Id = postgres; password = 123456@avbek");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Seed Categories data
+            modelBuilder.Entity<Category>().HasData(SeedData.GetCategories().ToArray());
+
+            // Seed books data
+            modelBuilder.Entity<Book>().HasData(SeedData.GetBooks().ToArray());
+
+            // Other entity configurations...
         }
     }
 }

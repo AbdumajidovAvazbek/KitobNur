@@ -23,6 +23,7 @@ namespace KitobNur.Desktop.Pages
 
         private void OrtgaButton_Click(object sender, RoutedEventArgs e)
         {
+            MainFrame.Navigate(new Kitob());
             // Handle Ortga button click event
             // Implement navigation logic to go back
         }

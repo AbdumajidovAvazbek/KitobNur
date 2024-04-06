@@ -30,7 +30,7 @@ namespace KitobNur.Desktop.Pages
         }
         private void QidirishButtin_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new KitobQoshish());
+            MainFrame.Navigate(new KitobQidirish());
         }
         private void KitoblarButton_Click(object sender, RoutedEventArgs e)
         {
