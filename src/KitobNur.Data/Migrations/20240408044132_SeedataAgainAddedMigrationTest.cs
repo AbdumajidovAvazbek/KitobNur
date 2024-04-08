@@ -4,10 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace KitobNur.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class SeedataAgainAddedMigrationTest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -90,7 +92,6 @@ namespace KitobNur.Data.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RentalID = table.Column<int>(type: "integer", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
@@ -133,13 +134,14 @@ namespace KitobNur.Data.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Author = table.Column<string>(type: "text", nullable: true),
-                    counte = table.Column<short>(type: "smallint", nullable: false),
+                    Count = table.Column<short>(type: "smallint", nullable: false),
                     Balance = table.Column<decimal>(type: "numeric", nullable: false),
                     ImagePath = table.Column<string>(type: "text", nullable: true),
                     CategoryId = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<byte>(type: "smallint", nullable: false),
                     RentalId = table.Column<long>(type: "bigint", nullable: true),
                     VistorLogId = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -186,6 +188,25 @@ namespace KitobNur.Data.Migrations
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CreatedAt", "Name", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 4, 8, 4, 41, 31, 639, DateTimeKind.Utc).AddTicks(3250), "Fiction", null },
+                    { 2, new DateTime(2024, 4, 8, 4, 41, 31, 639, DateTimeKind.Utc).AddTicks(3258), "Non-fiction", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "Id", "Author", "Balance", "CategoryId", "Count", "CreatedAt", "Description", "ImagePath", "Name", "RentalId", "Status", "UpdatedAt", "VistorLogId" },
+                values: new object[,]
+                {
+                    { 1L, "Harper Lee", 100m, 1, (short)10, new DateTime(2024, 4, 8, 4, 41, 31, 639, DateTimeKind.Utc).AddTicks(3420), "A novel by Harper Lee", "C:\\Users\\User\\source\\repos\\KitobNur\\KitobNur\\src\\KitobNur.Data\\photo_5217546724271315430_x.jpg", "To Kill a Mockingbird", null, (byte)0, null, null },
+                    { 2L, "George Orwell", 90m, 1, (short)8, new DateTime(2024, 4, 8, 4, 41, 31, 639, DateTimeKind.Utc).AddTicks(3424), "A novel by George Orwell", "C:\\Users\\User\\source\\repos\\KitobNur\\KitobNur\\src\\KitobNur.Data\\photo_5217546724271315430_x.jpg", "1984", null, (byte)0, null, null },
+                    { 3L, "Yuval Noah Harari", 120m, 2, (short)15, new DateTime(2024, 4, 8, 4, 41, 31, 639, DateTimeKind.Utc).AddTicks(3426), "A book by Yuval Noah Harari", "C:\\Users\\User\\source\\repos\\KitobNur\\KitobNur\\src\\KitobNur.Data\\photo_5217546724271315430_x.jpg", "Sapiens: A Brief History of Humankind", null, (byte)0, null, null }
                 });
 
             migrationBuilder.CreateIndex(

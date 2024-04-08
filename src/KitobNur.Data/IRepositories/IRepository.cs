@@ -1,6 +1,6 @@
 ﻿using KitobNur.Domain.Comon;
 
-namespace LocationTracker.Data.IRepositories;
+namespace KitobNur.Data.IRepositories;
 
 public interface IRepository<TEntity, TKey> where TEntity : Auditable<TKey>
 {

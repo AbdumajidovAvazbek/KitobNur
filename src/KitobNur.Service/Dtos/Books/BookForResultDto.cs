@@ -1,4 +1,5 @@
 ﻿using KitobNur.Domain.Entities.Categories;
+using KitobNur.Domain.Enum;
 
 namespace KitobNur.Service.Dtos.Books;
 
@@ -12,4 +13,5 @@ public class BookForResultDto
     public decimal Balance { get; set; }
     public string ImagePath { get; set; }
     public int CategoryId { get; set; }
+    public BookStatus Status { get; set; }
 }

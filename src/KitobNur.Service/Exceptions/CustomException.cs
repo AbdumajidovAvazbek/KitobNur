@@ -1,4 +1,4 @@
-﻿namespace SizeAdvisor.Service.Exseptions
+﻿namespace KitobNur.Service.Exseptions
 {
     public class CustomException : Exception
     {

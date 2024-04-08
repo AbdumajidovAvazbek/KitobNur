@@ -6,6 +6,7 @@ namespace KitobNur.Desktop.Pages
 {
     public partial class KitobQoshish : Page
     {
+        private readonly IServiceProvider _serviceProvider;
         public KitobQoshish()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace KitobNur.Desktop.Pages
 
         private void OrtgaButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new Kitob());
+            MainFrame.Navigate(new Kitob(_serviceProvider));
             // Handle Ortga button click event
             // Implement navigation logic to go back
         }

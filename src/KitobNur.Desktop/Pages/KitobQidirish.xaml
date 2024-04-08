@@ -21,7 +21,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox Name="KitobNomi"
+                    <!--<TextBox Name="KitobNomi"
                          md:HintAssist.Hint="Kitob Nomi"
                          Foreground="Black"
                          Background="#E0E0E0"
@@ -29,7 +29,7 @@
                          Height="40"
                          Margin="0,0,0,10"
                          FontSize="25"
-                         Grid.Row="0"/>
+                         Grid.Row="0"/>-->
                     <TextBox Name="Muallifi"
                          md:HintAssist.Hint="Muallifi"
                          Background="#F0F0F0"

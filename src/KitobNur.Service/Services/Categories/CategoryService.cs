@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
+using KitobNur.Data.IRepositories;
 using KitobNur.Domain.Entities.Categories;
 using KitobNur.Service.Configurations;
 using KitobNur.Service.Dtos.Categories;
+using KitobNur.Service.Exseptions;
 using KitobNur.Service.Extensions;
 using KitobNur.Service.Interfaces.Categories;
-using LocationTracker.Data.IRepositories;
 using Microsoft.EntityFrameworkCore;
-using SizeAdvisor.Service.Exseptions;
 
 
 namespace KitobNur.Service.Services.Categories;

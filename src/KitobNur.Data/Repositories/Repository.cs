@@ -1,9 +1,9 @@
-﻿using KitobNur.Domain.Comon;
-using LocationTracker.Data.IRepositories;
+﻿using KitobNur.Data.IRepositories;
+using KitobNur.Domain.Comon;
 using Microsoft.EntityFrameworkCore;
-using SizeAdvisor.Data.DbContexts;
+using KitobNur.Data.DbContexts;
 
-namespace LocationTracker.Data.Repositories;
+namespace KitobNur.Data.Repositories;
 
 public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : Auditable<TKey>
 {

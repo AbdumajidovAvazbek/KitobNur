@@ -6,7 +6,7 @@ using KitobNur.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using KitobNur.Data.SeedDatas; // Import the namespace containing SeedData
 
-namespace SizeAdvisor.Data.DbContexts
+namespace KitobNur.Data.DbContexts
 {
     public class AppDbContext : DbContext
     {
