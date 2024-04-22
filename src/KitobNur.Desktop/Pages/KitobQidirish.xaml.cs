@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using KitobNur.Data.DbContexts;
+using KitobNur.Domain.Entities.Books;
+using KitobNur.Service.Dtos.Books;
 using KitobNur.Service.Interfaces.Books;
+using Microsoft.EntityFrameworkCore;
 
 namespace KitobNur.Desktop.Pages
 {
@@ -24,22 +28,27 @@ namespace KitobNur.Desktop.Pages
             try
             {
                 string author = Muallifi.Text;
-                if (!string.IsNullOrEmpty(author))
+                if (string.IsNullOrEmpty(author))
                 {
-                    var bookResult = await _bookService.RetrieveByAuthorAsync(author);
-                    if (bookResult != null)
+                    MessageBox.Show("Please enter an author name!");
+                    return;
+                }
+
+                using (var dbContext = new AppDbContext())
+                {
+                    var books = await dbContext.Books
+                        .Where(p => EF.Functions.Like(p.Author.ToLower(), $"%{author.ToLower()}%"))
+                        .ToListAsync();
+
+                    if (books.Count > 0)
                     {
-                        // Navigate to ViewBookPage and pass the bookResult
-                        NavigationService.Navigate(new ViewBookPage(bookResult));
+                        var bookDto = ConvertToBookDto(books[0]); // Assuming you want to pass only the first book
+                        NavigationService.Navigate(new ViewBookPage(bookDto));
                     }
                     else
                     {
                         MessageBox.Show("Book not found!");
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Please enter an author name!");
                 }
             }
             catch (Exception ex)
@@ -47,6 +56,23 @@ namespace KitobNur.Desktop.Pages
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
+
+        private BookForResultDto ConvertToBookDto(Book book)
+        {
+            return new BookForResultDto
+            {
+                Id = book.Id,
+                Name = book.Name,
+                Author = book.Author,
+                Description= book.Description,
+                Count = book.Count,
+                Balance = book.Balance,
+                CategoryId = book.CategoryId,
+                ImagePath = book.ImagePath,
+                Status = book.Status,
+            };
+        }
+
 
         private void OrtgaButton_Click(object sender, RoutedEventArgs e)
         {

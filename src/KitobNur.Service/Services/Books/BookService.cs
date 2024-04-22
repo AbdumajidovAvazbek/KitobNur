@@ -32,6 +32,10 @@ namespace KitobNur.Service.Services.Books
 
         public async Task<BookForResultDto> CreateAsync(BookForCreationDto dto, IFormFile file)
         {
+            // Check if file is not null and has content
+            if (file == null || file.Length == 0)
+                throw new CustomException(400, "File is required");
+
             var book = await _bookRepository.SelectAll()
                 .Where(r => r.Name.ToLower() == dto.Name.ToLower())
                 .AsNoTracking()
@@ -47,10 +51,6 @@ namespace KitobNur.Service.Services.Books
             if (category == null)
                 throw new CustomException(404, "Category not found");
 
-            // Check if file is not null and has content
-            if (file == null || file.Length == 0)
-                throw new CustomException(400, "File is required");
-
             // Process the file, e.g., save it to a location
             var filePath = Path.Combine("uploads", Guid.NewGuid().ToString() + Path.GetExtension(file.FileName));
 
@@ -62,10 +62,12 @@ namespace KitobNur.Service.Services.Books
             // Map DTO to Book entity
             var mappedBook = _mapper.Map<Book>(dto);
             mappedBook.ImagePath = filePath; // Store the file path in the Book entity
+            mappedBook.CategoryId = dto.CategoryId; // Assign the category ID to the Book entity
 
             var result = await _bookRepository.InsertAsync(mappedBook);
             return _mapper.Map<BookForResultDto>(result);
         }
+
 
         public async Task<BookForResultDto> ModifyAsync(long id, BookForUpdateDto dto)
         {
@@ -111,8 +113,6 @@ namespace KitobNur.Service.Services.Books
                 // Handle null author case
                 return null; // Or throw an exception
             }
-            try
-            {
                 var book = await _bookRepository.SelectAll()
                     .FirstOrDefaultAsync(b => b.Author.ToLower() == author.ToLower());
 
@@ -120,17 +120,6 @@ namespace KitobNur.Service.Services.Books
                     throw new CustomException(404, "Book not found");
 
                 return _mapper.Map<BookForResultDto>(book);
-            }
-            catch (Exception ex)
-            {
-                await Console.Out.WriteLineAsync($"Outer Exception: {ex.Message}");
-                if (ex.InnerException != null)
-                {
-                    await Console.Out.WriteLineAsync($"Inner Exception: {ex.InnerException.Message}");
-                }
-                throw new CustomException(404, ex.Message);
-            }
-
         }
 
         public async Task<BookForResultDto> RetrieveByIdAsync(long id)
