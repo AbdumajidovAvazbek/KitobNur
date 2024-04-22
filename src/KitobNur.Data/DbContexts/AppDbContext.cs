@@ -20,9 +20,7 @@ namespace KitobNur.Data.DbContexts
         public DbSet<BestsellerBook> BestsellerBooks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("Server = localhost; port = 5432; database = KitobNurDb; User Id = postgres; password = 123456@avbek");
-        }
+            => optionsBuilder.UseNpgsql("Host = localhost; Port=5432; Database = KitobNurDb; UserId=postgres; Password=123456@avbek;");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

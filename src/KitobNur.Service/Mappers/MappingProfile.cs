@@ -10,43 +10,39 @@ using KitobNur.Service.Dtos.Categories;
 using KitobNur.Service.Dtos.Rentals;
 using KitobNur.Service.Dtos.Users;
 
-namespace KitobNur.Service.Mappers;
-
-public class MappingProfile : Profile
+namespace KitobNur.Service.Mappers
 {
-    MappingProfile()
+    public class MappingProfile : Profile
     {
-        //Users
-        CreateMap<User, UserForCreationDto>().ReverseMap();
-        CreateMap<User, UserForResultDto>().ReverseMap();
-        CreateMap<User, UserForUpdateDto>().ReverseMap();
-        CreateMap<User, UserTypeForUpdateDto>().ReverseMap();
-        CreateMap<User,UserStatusForUpdateDto>().ReverseMap();
+        public MappingProfile()
+        {
+            //Users
+            CreateMap<User, UserForCreationDto>().ReverseMap();
+            CreateMap<User, UserForResultDto>().ReverseMap();
+            CreateMap<User, UserForUpdateDto>().ReverseMap();
+            CreateMap<User, UserTypeForUpdateDto>().ReverseMap();
+            CreateMap<User, UserStatusForUpdateDto>().ReverseMap();
 
-        //Rental
-        CreateMap<Rental, RentalForCreationDto>().ReverseMap();
-        CreateMap<Rental, RentalForResultDto>().ReverseMap();
+            //Rental
+            CreateMap<Rental, RentalForCreationDto>().ReverseMap();
+            CreateMap<Rental, RentalForResultDto>().ReverseMap();
 
-        //Book
-        CreateMap<Book, BookForCreationDto>().ReverseMap();
-        CreateMap<Book, BookForUpdateDto>().ReverseMap();
-        CreateMap<Book, BookForResultDto>().ReverseMap();
+            //Book
+            CreateMap<Book, BookForCreationDto>().ReverseMap();
+            CreateMap<Book, BookForUpdateDto>().ReverseMap();
+            CreateMap<Book, BookForResultDto>().ReverseMap();
 
-        //OrderBook
-        CreateMap<OrderBook, OrderBookDto>().ReverseMap();
-        CreateMap<OrderBook, OrderBookForResultDto>().ReverseMap();
+            //OrderBook
+            CreateMap<OrderBook, OrderBookDto>().ReverseMap();
+            CreateMap<OrderBook, OrderBookForResultDto>().ReverseMap();
 
-        //InitBook
-        CreateMap<InitBook, InitBookDto>().ReverseMap();
-        CreateMap<InitBook, InitBookForResultDto>().ReverseMap();
+            //InitBook
+            CreateMap<InitBook, InitBookDto>().ReverseMap();
+            CreateMap<InitBook, InitBookForResultDto>().ReverseMap();
 
-        //Category
-        CreateMap<Category, CategoryDto>().ReverseMap();
-        CreateMap<Category, CategoryResultDto>().ReverseMap();
-
-
-
-
-
+            //Category
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Category, CategoryResultDto>().ReverseMap();
+        }
     }
 }
