@@ -4,7 +4,8 @@ using KitobNur.Domain.Entities.Users;
 using KitobNur.Domain.Library;
 using KitobNur.Domain.Users;
 using Microsoft.EntityFrameworkCore;
-using KitobNur.Data.SeedDatas; // Import the namespace containing SeedData
+using KitobNur.Data.SeedDatas;
+using KitobNur.Domain.Entities.Rentals; // Import the namespace containing SeedData
 
 namespace KitobNur.Data.DbContexts
 {
@@ -18,6 +19,8 @@ namespace KitobNur.Data.DbContexts
         public DbSet<VistorLog> VistorLogs { get; set; }
         public DbSet<OrderBook> OrderBooks { get; set; }
         public DbSet<BestsellerBook> BestsellerBooks { get; set; }
+        public DbSet<LibraryReadingHistory> LibraryReadingHistory { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Host = localhost; Port=5432; Database = KitobNurDb; UserId=postgres; Password=123456@avbek;");
@@ -31,7 +34,6 @@ namespace KitobNur.Data.DbContexts
 
             // Seed books data
             modelBuilder.Entity<Book>().HasData(SeedData.GetBooks().ToArray());
-
             // Other entity configurations...
         }
     }

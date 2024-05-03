@@ -29,5 +29,25 @@ namespace KitobNur.Desktop.Pages
         {
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OrtgaButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
