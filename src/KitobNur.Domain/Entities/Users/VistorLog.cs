@@ -6,6 +6,5 @@ public class VistorLog : Auditable<long>
 {
     public long UserId { get; set; }
     public User User { get; set; }
-    public long BookId { get; set; }
-    public Book Book { get; set; }
+    public ICollection<Book> Books { get; set; }
 }

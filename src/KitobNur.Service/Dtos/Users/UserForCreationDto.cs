@@ -1,9 +1,8 @@
-﻿using KitobNur.Domain.Comon;
-using KitobNur.Domain.Enum;
+﻿using KitobNur.Domain.Enum;
 
-namespace KitobNur.Domain.Users
+namespace KitobNur.Service.Dtos.Users
 {
-    public class User : Auditable<long>
+    public class UserForCreationDto
     {
         public string Name { get; set; }
         public string MiddleName { get; set; }
@@ -13,10 +12,7 @@ namespace KitobNur.Domain.Users
         public string PassportNumber { get; set; }
         public string? WorkPlace { get; set; }
         public string? StudyPlaces { get; set; }
-        public string ImageUrl { get; set; }
         public string Address { get; set; }
         public GenderType GenderType { get; set; }
-        public UserStatus userStatus { get; set; }
-        public UserType userType { get; set; }
     }
 }
