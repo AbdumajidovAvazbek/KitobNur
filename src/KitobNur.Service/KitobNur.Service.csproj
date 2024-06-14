@@ -6,22 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Commons\" />
-    <Folder Include="Services\Books\" />
-    <Folder Include="Services\Users\" />
-    <Folder Include="Services\Rentals\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.34" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\KitobNur.Data\KitobNur.Data.csproj" />
-    <ProjectReference Include="..\KitobNur.Domain\KitobNur.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

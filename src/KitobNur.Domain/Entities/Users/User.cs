@@ -5,7 +5,7 @@ namespace KitobNur.Domain.Users
 {
     public class User : Auditable<long>
     {
-        public string Name { get; set; }
+        public string UserName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string? TelegramId { get; set; }

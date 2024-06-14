@@ -63,7 +63,7 @@ namespace KitobNur.Data.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    UserName = table.Column<string>(type: "text", nullable: true),
                     MiddleName = table.Column<string>(type: "text", nullable: true),
                     LastName = table.Column<string>(type: "text", nullable: true),
                     TelegramId = table.Column<string>(type: "text", nullable: true),
@@ -85,49 +85,6 @@ namespace KitobNur.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rentals",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RentalID = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rentals", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Rentals_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "VistorLogs",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VistorLogs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_VistorLogs_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
@@ -140,8 +97,6 @@ namespace KitobNur.Data.Migrations
                     Balance = table.Column<decimal>(type: "numeric", nullable: false),
                     ImagePath = table.Column<string>(type: "text", nullable: true),
                     CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    RentalId = table.Column<long>(type: "bigint", nullable: true),
-                    VistorLogId = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
@@ -154,16 +109,6 @@ namespace KitobNur.Data.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Books_Rentals_RentalId",
-                        column: x => x.RentalId,
-                        principalTable: "Rentals",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Books_VistorLogs_VistorLogId",
-                        column: x => x.VistorLogId,
-                        principalTable: "VistorLogs",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -188,20 +133,67 @@ namespace KitobNur.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Rentals",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RentalID = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    BookID = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rentals", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Rentals_Books_BookID",
+                        column: x => x.BookID,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Rentals_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VistorLogs",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    BookId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VistorLogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VistorLogs_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_VistorLogs_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Books_CategoryId",
                 table: "Books",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_RentalId",
-                table: "Books",
-                column: "RentalId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_VistorLogId",
-                table: "Books",
-                column: "VistorLogId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InitBooks_BookId",
@@ -209,9 +201,19 @@ namespace KitobNur.Data.Migrations
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Rentals_BookID",
+                table: "Rentals",
+                column: "BookID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rentals_UserId",
                 table: "Rentals",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VistorLogs_BookId",
+                table: "VistorLogs",
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VistorLogs_UserId",
@@ -232,19 +234,19 @@ namespace KitobNur.Data.Migrations
                 name: "OrderBooks");
 
             migrationBuilder.DropTable(
-                name: "Books");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "Rentals");
 
             migrationBuilder.DropTable(
                 name: "VistorLogs");
 
             migrationBuilder.DropTable(
+                name: "Books");
+
+            migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }
